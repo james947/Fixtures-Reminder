@@ -4,20 +4,20 @@ require 'time'
 require 'tzinfo'
 require 'mail'
 require 'pry'
-
+require 'dotenv'
+Dotenv.load('.env')
 
 # Load CSV and send notifications for matches
 def send_notifications(file)
   CSV.foreach(file, headers: true) do |row|
-binding.pry
     match_time = DateTime.parse(row['Date']).to_time
     
     next if  DateTime.parse(row['Date']).to_date != Date.today
-    
+
 
     time_until_match = match_time - Time.now
     # Send notification 10 minutes before the match
-    if time_until_match > 0 && time_until_match <= 600 
+    if time_until_match > 0 #{&& time_until_match <= 600 }
       
       subject = "Upcoming Match Reminder"
       body = "Match Details:\n" \
