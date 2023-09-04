@@ -29,7 +29,7 @@ def send_notifications(file)
     end
 
     # Send morning notification
-    if Time.now.hour == 8 && tc&& time_until_match <= 86400
+    if Time.now.hour == 8 && time_until_match <= 86400
       morning_subject = "Morning Match Reminder"
       morning_body = "Good morning! There's a match today at #{match_time_utc.strftime('%H:%M %p')}. Get ready to cheer!"
       send_email(morning_subject, morning_body)
