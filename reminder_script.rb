@@ -1,7 +1,6 @@
 require 'csv'
 require 'date'
 require 'time'
-require 'tzinfo'
 require 'mail'
 require 'pry'
 require 'dotenv'
@@ -14,11 +13,9 @@ def send_notifications(file)
     
     next if  DateTime.parse(row['Date']).to_date != Date.today
 
-
     time_until_match = match_time - Time.now
     # Send notification 10 minutes before the match
-    if time_until_match > 0 #{&& time_until_match <= 600 }
-      
+    if time_until_match < 0 #{&& time_until_match <= 600 }
       subject = "Upcoming Match Reminder"
       body = "Match Details:\n" \
       "Match Number: #{row['Match Number']}\n" \
